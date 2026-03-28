@@ -8,19 +8,50 @@ const getTasksRouter = () => {
     //GET
     router.get('/', async (req, res) => {
         const result = tasksController.getAll()
-        res.status(result.status).json(result.data)
+        res.status(result.status)
+        if (req.headers.accept.includes('application/json')) {
+            res.json(result.data)
+        } else if (req.headers.accept.includes('text/html')) {
+            res.setHeader('Content-Type', 'text/html');
+
+            const html = `
+            <html>
+            <body>
+            <h1>Tasks</h1>
+            <table border="1">
+            <tr><th>ID</th><th>Title</th><th>Status</th></tr>
+            ${result.data.map(t => `<tr><td>${t.id}</td><td>${t.title}</td><td>${t.status}</td></tr>`).join('')}
+            </table>
+            </body>
+            </html>
+            `;
+
+            res.send(html)
+        }
     });
 
     //POST
     router.post('/', async (req, res) => {
         const result = tasksController.create(req.body)
-        res.status(result.status).json(result.data)
+        res.status(result.status)
+        if (req.headers.accept.includes('application/json')) {
+            res.json(result.data)
+        } else if (req.headers.accept.includes('text/html')) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(`<p>Task created with id ${result.data.id}</p>`);
+        }
     });
 
     router.post('/:id/done', async (req, res) => {
         const id = req.params.id
         const result = tasksController.markDone(id)
         res.status(result.status).json(result.data)
+        if (req.headers.accept.includes('application/json')) {
+            res.json(result.data)
+        } else if (req.headers.accept.includes('text/html')) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(`<p>Task ${result.data.title} was set to done status</p>`);
+        }
     });
 
     return router;

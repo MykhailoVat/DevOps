@@ -4,7 +4,12 @@ class TasksRepository {
     }
 
     getAll() {
-        return 0;
+        const exemple = [
+            { id: 1, title: 'Task 1', status: 'done' },
+            { id: 2, title: 'Task 2', status: 'pending' }
+        ]
+
+        return exemple;
     }
 
     create(data) {
