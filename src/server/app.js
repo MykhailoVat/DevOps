@@ -2,8 +2,6 @@ import express from "express";
 import getUserRouter from "./routes/appRoutes/tasksRoutes.js";
 import getHealthRouter from "./routes/techRoutes/healthRoutes.js";
 import getBaseRouter from "./routes/techRoutes/baseRoutes.js";
-import dotenv from 'dotenv';
-dotenv.config({path: "../../.env"});
 
 const app = express();
 

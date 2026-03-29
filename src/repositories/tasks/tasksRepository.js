@@ -4,19 +4,14 @@ class TasksRepository {
     }
 
     getAll() {
-        const exemple = [
-            { id: 1, title: 'Task 1', status: 'done' },
-            { id: 2, title: 'Task 2', status: 'pending' }
-        ]
-
-        return exemple;
+        return 0;
     }
 
     create(data) {
         return 0;
     }
 
-    markDone(id){
+    markDone(id) {
         if (id === -1)
             throw new Error("test");
         return 0;

@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import checkerTool from "../../../repositories/checkerTool.js";
 
 const router = Router();
 
@@ -10,8 +11,9 @@ const getHealthRouter = () => {
     });
 
     router.get('/ready', async (req, res) => {
-        //const result = controller.checkDB()
-        //res.status(result.status).json(result.data)
+        const result = await checkerTool.checkDb();
+
+        res.status(result.status).send(result.error || null);
     });
 
     return router;
