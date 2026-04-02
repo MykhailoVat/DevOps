@@ -22,6 +22,7 @@ class TasksController {
     }
 
     async markDone(id) {
+        console.log(id);
         const task = await this.service.markDone(id);
         return {
             status: 200,

@@ -1,4 +1,5 @@
 import pool from "../pool.js";
+import q from "./queries.js";
 
 class TasksRepository {
     constructor(pool) {
@@ -7,23 +8,20 @@ class TasksRepository {
     }
 
     async getAll() {
-        return await this.pool.query('SELECT * FROM tasks');
+        const res = await this.pool.query(q.getAll)
+
+        return res.rows
     }
 
     async create(data) {
-        const res = await this.pool.query
-        ('INSERT INTO tasks (title, status) ' +
-         'VALUES ($1, $2) RETURNING *',
-         [data.title, data.status]);
-
-        console.log(res.rows[0]);
+        const res = await this.pool.query(q.create,[data.title, data.status]);
 
         return res.rows[0];
     }
 
     async markDone(id) {
-        return await this.pool.query
-        (`UPDATE tasks SET status = 'DONE' WHERE id = $1`, [id]);
+        const res = await this.pool.query(q.markDone, [id]);
+        return res.rows[0];
     }
 }
 
