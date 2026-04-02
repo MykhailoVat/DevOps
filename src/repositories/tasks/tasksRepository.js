@@ -14,7 +14,7 @@ class TasksRepository {
     }
 
     async create(data) {
-        const res = await this.pool.query(q.create,[data.title, data.status]);
+        const res = await this.pool.query(q.create,[data.title, data.status, data.created_at]);
 
         return res.rows[0];
     }

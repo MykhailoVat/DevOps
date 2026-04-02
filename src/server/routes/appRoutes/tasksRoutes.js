@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import fat_html from "./fat_html.js";
 
 const router = Router();
 import tasksController from '../../../controllers/tasks/tasksWrapper.js';
@@ -13,19 +14,7 @@ const getTasksRouter = () => {
         if (req.accepts('text/html')) {
             res.setHeader('Content-Type', 'text/html');
 
-            const html = `
-            <html>
-            <body>
-            <h1>Tasks</h1>
-            <table border="1">
-            <tr><th>ID</th><th>Title</th><th>Status</th></tr>
-            ${result.data.map(t => `<tr><td>${t.id}</td><td>${t.title}</td><td>${t.status}</td></tr>`).join('')}
-            </table>
-            </body>
-            </html>
-            `;
-
-            res.send(html)
+            res.send(fat_html(result.data))
         } else if (req.accepts('application/json')) {
             res.json(result.data)
         }

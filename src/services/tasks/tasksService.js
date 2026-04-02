@@ -1,5 +1,5 @@
-import tasksService from '../../repositories/tasks/tasksRepository.js';
 import tasksRepository from "../../repositories/tasks/tasksRepository.js";
+import {InvariantError} from "../../errors/customErrors.js";
 
 class TasksService {
     constructor(repository) {
@@ -12,11 +12,23 @@ class TasksService {
     }
 
     async create(data) {
-       return await this.repository.create(data);
+        this.checkTitle(data);
+        this.insertDefaultStatus(data);
+        return await this.repository.create(data);
     }
 
-    async markDone(id){
+    async markDone(id) {
         return await this.repository.markDone(id);
+    }
+
+    checkTitle(data) {
+        if (data.title.length > 30 || data.title.length === 0) {
+            throw new InvariantError('Title cannot be longer than 30 or shorter than 0 characters.');
+        }
+    }
+
+    insertDefaultStatus(data) {
+        data.status = 'NEW';
     }
 }
 
