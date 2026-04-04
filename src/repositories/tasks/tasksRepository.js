@@ -14,13 +14,18 @@ class TasksRepository {
     }
 
     async create(data) {
-        const res = await this.pool.query(q.create,[data.title, data.status, data.created_at]);
+        const res = await this.pool.query(q.create,[data.title, data.status]);
 
         return res.rows[0];
     }
 
     async markDone(id) {
         const res = await this.pool.query(q.markDone, [id]);
+        return res.rows[0];
+    }
+
+    async find(id) {
+        const res = await this.pool.query(q.find, [id]);
         return res.rows[0];
     }
 }

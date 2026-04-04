@@ -12,4 +12,11 @@ class InvariantError extends Error {
     }
 }
 
-export { ValidationError , InvariantError};
+class NotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.status = 404;
+    }
+}
+
+export { ValidationError , InvariantError, NotFoundError };

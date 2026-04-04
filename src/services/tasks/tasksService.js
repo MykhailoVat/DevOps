@@ -1,5 +1,5 @@
 import tasksRepository from "../../repositories/tasks/tasksRepository.js";
-import {InvariantError} from "../../errors/customErrors.js";
+import {InvariantError, NotFoundError} from "../../errors/customErrors.js";
 
 class TasksService {
     constructor(repository) {
@@ -18,6 +18,7 @@ class TasksService {
     }
 
     async markDone(id) {
+        await this.find(id);
         return await this.repository.markDone(id);
     }
 
@@ -29,6 +30,14 @@ class TasksService {
 
     insertDefaultStatus(data) {
         data.status = 'NEW';
+    }
+
+    async find(id){
+        const res = await this.repository.find(id)
+
+        if(!res){
+            throw new NotFoundError('Not Found');
+        }
     }
 }
 
