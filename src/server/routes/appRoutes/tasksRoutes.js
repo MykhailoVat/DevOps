@@ -13,8 +13,11 @@ const getTasksRouter = () => {
 
         if (req.accepts('text/html')) {
             res.setHeader('Content-Type', 'text/html');
-
-            res.send(fat_html(result.data))
+            if (result.error) {
+                res.send(fat_html(result.data))
+            } else {
+                res.send(fat_html(result.data))
+            }
         } else if (req.accepts('application/json')) {
             res.json(result.data)
         }
@@ -27,7 +30,11 @@ const getTasksRouter = () => {
 
         if (req.accepts('text/html')) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(`<p>Task created with id ${result.data.id}</p>`);
+            if (result.error) {
+                res.send("ERROR")
+            } else {
+                res.send(`<p>Task created with id ${result.data.id}</p>`);
+            }
         } else if (req.accepts('application/json')) {
             res.json(result.data)
         }
@@ -38,10 +45,14 @@ const getTasksRouter = () => {
             const result = await tasksController.markDone(id)
             res.status(result.status)
 
-            if (req.headers.accept.includes('text/html')) {
+            if (req.accepts('text/html')) {
                 res.setHeader('Content-Type', 'text/html');
-                res.send(`<p>Task ${result.data.title} with id ${result.data.id} was set to done status</p>`);
-            } else if (req.headers.accept.includes('application/json')) {
+                if (result.error) {
+                    res.send("ERROR")
+                } else {
+                    res.send(`<p>Task ${result.data.title} with id ${result.data.id} was set to done status</p>`);
+                }
+            } else if (req.accepts('application/json')) {
                 res.json(result.data)
             }
         }

@@ -65,7 +65,8 @@ class TasksController {
         console.log(error);
         return {
             data: error.message,
-            status: error.status
+            status: error.status,
+            error: true
         }
     }
 }
