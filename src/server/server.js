@@ -4,9 +4,12 @@ import dotenv from 'dotenv';
 import path from 'path'
 import {fileURLToPath} from 'url'
 import * as fs from "node:fs";
+import http from "http";
+
+const server = http.createServer(app);
 
 if (process.env.LISTEN_FDS) {
-    app.listen({ fd: 3 }, () => {
+    server.listen({ fd: 3 }, () => {
         console.log('Started via systemd socket');
     });
 } else {
@@ -31,7 +34,7 @@ if (process.env.LISTEN_FDS) {
         address = config.app.host
     }
 
-    app.listen(port, address, () => {
+    server.listen(port, address, () => {
         console.log(`Started on ${address}:${port}`);
     });
 }
