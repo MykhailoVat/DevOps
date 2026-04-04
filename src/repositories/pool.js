@@ -2,12 +2,36 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import path from 'path'
 import { fileURLToPath } from 'url'
+import fs from "node:fs";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+let host
+let port
+let user
+let password
+let name
 
-dotenv.config({
-    path: path.resolve(__dirname, '../../.env_db')
-})
+if (process.env.NODE_ENV === 'development') {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+    dotenv.config({
+        path: path.resolve(__dirname, '../../.env_db')
+    })
+
+    host = process.env.DATABASE_HOST
+    port = process.env.DATABASE_PORT
+    user = process.env.DATABASE_USER
+    password = process.env.DATABASE_PASSWORD
+    name = process.env.DATABASE_NAME
+} else {
+    const config = JSON.parse(
+        fs.readFileSync('/etc/mywebapp/config.json', 'utf-8')
+    );
+    host = config.db_host
+    port = config.db_port
+    user = config.db_user
+    password = config.db_password
+    name = config.db_name
+}
 
 const pool = new Pool({
     host: process.env.DB_HOST,
