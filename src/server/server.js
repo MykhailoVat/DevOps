@@ -22,8 +22,8 @@ if (process.env.NODE_ENV === 'development') {
         fs.readFileSync('/etc/mywebapp/config.json', 'utf-8')
     );
 
-    port = config.app_port
-    address = config.app_address
+    port = config.app.port
+    address = config.app.host
 }
 
 app.listen(port, address, () => {

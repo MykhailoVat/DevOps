@@ -26,11 +26,11 @@ if (process.env.NODE_ENV === 'development') {
     const config = JSON.parse(
         fs.readFileSync('/etc/mywebapp/config.json', 'utf-8')
     );
-    host = config.db_host
-    port = config.db_port
-    user = config.db_user
-    password = config.db_password
-    name = config.db_name
+    host = config.db.host
+    port = config.db.port
+    user = config.db.user
+    password = config.db.password
+    name = config.db.name
 }
 
 const pool = new Pool({
