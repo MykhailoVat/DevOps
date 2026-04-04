@@ -6,7 +6,7 @@ const getBaseRouter = () => {
 
     //GET
     router.get('/', async (req, res) => {
-        if(req.headers.accept.includes('text/html')) {
+        if(req.accepts('text/html')) {
             res.setHeader('content-type', 'text/html');
 
             const html = `
