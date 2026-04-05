@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -e
 
 OPERATOR_PASS="12345678"

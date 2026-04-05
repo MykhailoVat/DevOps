@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 mkdir /etc/systemd/system/mywebapp
 cp mywebapp.service /etc/systemd/system/
