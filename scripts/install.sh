@@ -3,7 +3,7 @@ set -e
 
 apt update
 apt upgrade -y
-apt install -y nginx nodejs npm postgesql
+apt install -y nginx nodejs npm postgresql
 
 sudo -u postgres psql -c "CREATE DATABASE app;"
 sudo -u postgres psql -c "CREATE USER myuser WITH PASSWORD 'pass';"
