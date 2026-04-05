@@ -35,6 +35,6 @@ chown -R app:app "/opt/mywebapp"
 chmod -R 750 "/opt/mywebapp"
 
 sudo usermod -L $DEFAULT_USER
-loginctl terminate-user $DEFAULT_USER
+#loginctl terminate-user $DEFAULT_USER
 
 echo "USERS SCRIPT DONE"
