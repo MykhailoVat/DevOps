@@ -1,0 +1,14 @@
+[Unit]
+Description=My Web App
+Requires=mywebapp.socket
+After=network.target
+
+[Service]
+User=app
+WorkingDirectory=/opt/mywebapp
+ExecStartPre=/opt/mywebapp/init_db/migrate.sh
+ExecStart=/usr/bin/node src/server/server.js
+#StandardInput=socket
+StandardOutput=journal
+StandardError=journal
+Restart=no

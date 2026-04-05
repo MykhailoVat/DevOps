@@ -1,0 +1,13 @@
+{
+"db":{
+"host": "127.0.0.1",
+"port": 5432,
+"user": "myuser",
+"password": "pass",
+"name": "app"
+},
+"app":{
+"host": "127.0.0.1",
+"port": 3000
+}
+}
