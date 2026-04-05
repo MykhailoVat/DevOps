@@ -7,3 +7,5 @@ cp mywebapp.socket /etc/systemd/system/
 
 systemctl start mywebapp.socket
 systemctl enable mywebapp.socket
+
+echo "SYSTEMD SCRIPT DONE"
