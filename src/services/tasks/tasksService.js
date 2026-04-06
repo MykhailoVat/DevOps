@@ -24,7 +24,7 @@ class TasksService {
 
     checkTitle(data) {
         if (data.title.length > 30 || data.title.length === 0) {
-            throw new InvariantError('Title cannot be longer than 30 or shorter than 0 characters.');
+            throw new InvariantError('Title cannot be longer than 30 or have 0 characters.');
         }
     }
 
