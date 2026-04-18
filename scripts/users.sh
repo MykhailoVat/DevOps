@@ -30,6 +30,7 @@ operator ALL=(ALL) NOPASSWD: /bin/systemctl stop mywebapp
 operator ALL=(ALL) NOPASSWD: /bin/systemctl status mywebapp
 operator ALL=(ALL) NOPASSWD: /bin/systemctl restart mywebapp
 operator ALL=(ALL) NOPASSWD: /bin/systemctl reload nginx
+operator ALL=(ALL) NOPASSWD: /usr/local/bin/mywebappctl
 EOF
 
 chmod 440 $SUDO_FILE
