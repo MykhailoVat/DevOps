@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 import fs from "node:fs";
 
 //let host
-let port
+//let port
 let user
 let password
 let name
