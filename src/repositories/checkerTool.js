@@ -1,4 +1,3 @@
-import {Client} from 'pg';
 import pool from './pool.js';
 
 class Checker {
